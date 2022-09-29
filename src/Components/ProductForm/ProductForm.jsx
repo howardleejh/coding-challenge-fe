@@ -187,7 +187,7 @@ const ProductForm = () => {
           <Col xs={20} xl={12}>
             <h1>{product.p_title}</h1>
             <h4>{product.sku}</h4>
-            {product.image ? (
+            {product ? (
               <>
                 <img
                   src={
