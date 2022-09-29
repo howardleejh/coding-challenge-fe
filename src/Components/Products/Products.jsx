@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
-import { Row, Spin, Select, Button, message } from 'antd'
+import { Row, Space, Select, Button, message, Skeleton } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import CollectionCard from '../CollectionCard/CollectionCard'
 import axios from 'axios'
@@ -206,7 +206,13 @@ const Products = () => {
           )}
         </Row>
       ) : (
-        <Spin />
+        <>
+          <Space>
+            <Skeleton.Image active />
+            <Skeleton.Image active />
+            <Skeleton.Image active />
+          </Space>
+        </>
       )}
     </div>
   )

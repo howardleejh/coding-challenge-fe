@@ -29,6 +29,7 @@ const ProductForm = () => {
   const [isEditing, setIsEditing] = useState(false)
   const [imageUpload, setImageUpload] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [loading, setIsLoading] = useState(false)
 
   const props = {
     name: 'file',
@@ -39,11 +40,14 @@ const ProductForm = () => {
     },
 
     onChange(info) {
+      setIsLoading(true)
       if (info.file.status === 'done') {
         setImageUpload(`${info.file.response.secure_url}`)
         message.success(`${info.file.name} file uploaded successfully`, 5)
+        setIsLoading(false)
         return
       } else if (info.file.status === 'error') {
+        setIsLoading(false)
         message.error(`${info.file.name} file upload failed.`, 5)
         return
       }
@@ -64,6 +68,7 @@ const ProductForm = () => {
   }
 
   const onFinish = async (values) => {
+    setIsLoading(true)
     try {
       await axios({
         method: 'patch',
@@ -80,10 +85,12 @@ const ProductForm = () => {
           stock: values.stock,
         },
       })
+      setIsLoading(false)
       message.success(`message: Successfully updated`, 5)
       navigate('/collections')
       return
     } catch (err) {
+      setIsLoading(false)
       message.error(`${err.response.data}`, 5)
       return
     }
@@ -116,11 +123,13 @@ const ProductForm = () => {
 
   const cancelDeleteHandler = () => {
     message.warning(`Message: User canceled request.`)
+    setIsLoading(false)
     setIsModalOpen(false)
     return
   }
 
   const ConfirmDeleteProductHandler = async () => {
+    setIsLoading(true)
     try {
       await axios({
         method: 'delete',
@@ -132,9 +141,12 @@ const ProductForm = () => {
           sku: productId,
         },
       })
+      setIsLoading(false)
       message.success(`message: Successfully deleted!`, 5)
       navigate('/collections')
+      return
     } catch (err) {
+      setIsLoading(false)
       message.error(`${err.response.data}`, 5)
       return
     }
@@ -151,12 +163,10 @@ const ProductForm = () => {
             auth_token: cookies.auth_token,
           },
         })
+        setProduct(response.data)
+        return
       } catch (err) {
         message.error(`${err.response.data},`, 5)
-        return
-      }
-      if (response.data) {
-        setProduct(response.data)
         return
       }
     }
@@ -177,14 +187,20 @@ const ProductForm = () => {
           <Col xs={20} xl={12}>
             <h1>{product.p_title}</h1>
             <h4>{product.sku}</h4>
-            <img
-              src={
-                product.image
-                  ? product.image
-                  : `https://via.placeholder.com/400`
-              }
-              alt='Product'
-            />
+            {product.image ? (
+              <>
+                <img
+                  src={
+                    product.image
+                      ? product.image
+                      : `https://via.placeholder.com/400`
+                  }
+                  alt='Product'
+                />
+              </>
+            ) : (
+              <Spin />
+            )}
           </Col>
           <Col xs={20} xl={12}>
             <Row align='middle' justify='center'>
@@ -268,17 +284,25 @@ const ProductForm = () => {
                 </Form.Item>
                 <Form.Item>
                   <Upload {...props} className='product-img-upload'>
-                    <Button type='primary' icon={<UploadOutlined />}>
+                    <Button
+                      type='primary'
+                      icon={<UploadOutlined />}
+                      loading={loading}
+                    >
                       Update Image
                     </Button>
                   </Upload>
                 </Form.Item>
                 <Form.Item className={isEditing ? null : 'visibility'}>
                   <Space direction='horizontal'>
-                    <Button type='primary' htmlType='submit'>
+                    <Button type='primary' htmlType='submit' loading={loading}>
                       Update
                     </Button>
-                    <Button type='danger' onClick={resetHandler}>
+                    <Button
+                      type='danger'
+                      onClick={resetHandler}
+                      loading={loading}
+                    >
                       Reset
                     </Button>
                   </Space>
@@ -293,6 +317,7 @@ const ProductForm = () => {
                     type='danger'
                     size='large'
                     onClick={deleteProductHandler}
+                    loading={loading}
                   >
                     Delete Product
                   </Button>

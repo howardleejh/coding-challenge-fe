@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { Form, Input, Button, message, Modal, PageHeader } from 'antd'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { Form, Input, Button, message, Modal } from 'antd'
 import './ProfileForm.scss'
 
 const ProfileForm = () => {
@@ -9,10 +10,13 @@ const ProfileForm = () => {
   const user = JSON.parse(sessionStorage.getItem('user'))
   // eslint-disable-next-line
   const [cookies, setCookie, removeCookie] = useCookies()
+  const navigate = useNavigate()
   const [isEditing, setIsEditing] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [loading, setIsLoading] = useState(false)
 
   const onFinish = async (values) => {
+    setIsLoading(true)
     const [firstName, lastName] = values.fullName.trim().split(' ')
 
     if (values.password !== values.repeatPassword) {
@@ -36,14 +40,16 @@ const ProfileForm = () => {
           repeat_password: values.repeatPassword,
         },
       })
+      removeCookie('auth_token', { path: '/' })
+      sessionStorage.clear()
+      message.success('Profile updated successfully!', 5)
+      setIsLoading(false)
+      return
     } catch (err) {
+      setIsLoading(false)
       message.error(`${err.response.data}`, 5)
       return
     }
-    removeCookie('auth_token', { path: '/' })
-    sessionStorage.clear()
-    message.success('Profile updated successfully!', 5)
-    return
   }
 
   const onFinishFailed = () => {
@@ -78,6 +84,7 @@ const ProfileForm = () => {
   }
 
   const confirmDeleteHandler = async () => {
+    setIsLoading(true)
     try {
       await axios({
         method: 'delete',
@@ -89,19 +96,31 @@ const ProfileForm = () => {
           email: user.email,
         },
       })
+      setIsModalOpen(false)
+      setIsLoading(false)
+      removeCookie('auth_token', { path: '/' })
+      sessionStorage.clear()
+      message.success('Profile deleted successfully!', 5)
+      navigate('/')
+      return
     } catch (err) {
+      setIsLoading(false)
       message.error(`${err.response.data}`, 5)
       return
     }
-    setIsModalOpen(false)
-    removeCookie('auth_token', { path: '/' })
-    sessionStorage.clear()
-    message.success('Profile deleted successfully!', 5)
-    return
+  }
+
+  const goBackHandler = () => {
+    navigate('/dashboard')
   }
 
   return (
     <div className='profile-form-container'>
+      <PageHeader
+        className='profile-page-header'
+        onBack={goBackHandler}
+        subTitle={`Back to Dashboard`}
+      />
       <Button
         size='large'
         type='primary'
@@ -186,10 +205,10 @@ const ProfileForm = () => {
         {isEditing ? (
           <>
             <Form.Item>
-              <Button type='primary' htmlType='submit'>
+              <Button type='primary' htmlType='submit' loading={loading}>
                 Submit
               </Button>
-              <Button type='danger' onClick={resetHandler}>
+              <Button type='danger' onClick={resetHandler} loading={loading}>
                 Reset
               </Button>
             </Form.Item>
@@ -206,6 +225,7 @@ const ProfileForm = () => {
           type='danger'
           className='delete-profile-button'
           onClick={deleteProfileHandler}
+          loading={loading}
         >
           DELETE PROFILE
         </Button>

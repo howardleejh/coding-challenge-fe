@@ -32,22 +32,22 @@ const Register = () => {
           repeat_password: values.repeatPassword,
         },
       })
+      setLoading(false)
+      form.resetFields()
+      message.success(
+        'Registered successfully! Redirecting to Log In in 3 seconds.',
+        5
+      )
+      setLoading(false)
+      setTimeout(() => {
+        navigate('/')
+      }, 3000)
+      return
     } catch (err) {
       message.error(`${err.response.data}`, 5)
       setLoading(false)
       return
     }
-
-    form.resetFields()
-    message.success(
-      'Registered successfully! Redirecting to Log In in 3 seconds.',
-      5
-    )
-    setLoading(false)
-    setTimeout(() => {
-      navigate('/')
-    }, 3000)
-    return
   }
 
   const onFinishFailed = () => {

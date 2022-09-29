@@ -23,6 +23,7 @@ const AddProduct = () => {
   const [cookies, setCookie] = useCookies(['auth_token'])
   const [form] = Form.useForm()
   const [imageUpload, setImageUpload] = useState(null)
+  const [loading, setIsLoading] = useState(false)
 
   const props = {
     name: 'file',
@@ -33,12 +34,15 @@ const AddProduct = () => {
     },
 
     onChange(info) {
+      setIsLoading(true)
       if (info.file.status === 'done') {
         setImageUpload(`${info.file.response.secure_url}`)
         message.success(`${info.file.name} file uploaded successfully`, 5)
+        setIsLoading(false)
         return
       } else if (info.file.status === 'error') {
         message.error(`${info.file.name} file upload failed.`, 5)
+        setIsLoading(false)
         return
       }
     },
@@ -58,6 +62,7 @@ const AddProduct = () => {
   }
 
   const onFinish = async (values) => {
+    setIsLoading(true)
     try {
       await axios({
         method: 'post',
@@ -73,11 +78,13 @@ const AddProduct = () => {
           stock: values.stock ?? '',
         },
       })
+      setIsLoading(false)
       message.success(`message: Successfully created`, 5)
       form.resetFields()
       setImageUpload(null)
       return
     } catch (err) {
+      setIsLoading(false)
       message.error(`${err.response.data}`, 5)
       return
     }
@@ -179,17 +186,25 @@ const AddProduct = () => {
               </Form.Item>
               <Form.Item>
                 <Upload {...props} className='product-img-upload'>
-                  <Button type='primary' icon={<UploadOutlined />}>
+                  <Button
+                    type='primary'
+                    icon={<UploadOutlined />}
+                    loading={loading}
+                  >
                     Update Image
                   </Button>
                 </Upload>
               </Form.Item>
               <Form.Item>
                 <Space direction='horizontal'>
-                  <Button type='primary' htmlType='submit'>
+                  <Button type='primary' htmlType='submit' loading={loading}>
                     Add Item
                   </Button>
-                  <Button type='danger' onClick={resetHandler}>
+                  <Button
+                    type='danger'
+                    onClick={resetHandler}
+                    loading={loading}
+                  >
                     Reset
                   </Button>
                 </Space>

@@ -27,18 +27,18 @@ const Login = () => {
           password: password,
         },
       })
+      setCookie('auth_token', response.data.token)
+      home.loggedIn(response.data.token)
+      form.resetFields()
+      setLoading(false)
+      message.success('Login successfully!', 5)
+      navigate('/')
+      return
     } catch (err) {
       message.error(`Error: Your email or password is incorrect.`, 5)
       setLoading(false)
       return
     }
-    setCookie('auth_token', response.data.token)
-    home.loggedIn(response.data.token)
-    form.resetFields()
-    setLoading(false)
-    message.success('Login successfully!', 5)
-    navigate('/')
-    return
   }
 
   const onFinishFailed = (errorInfo) => {

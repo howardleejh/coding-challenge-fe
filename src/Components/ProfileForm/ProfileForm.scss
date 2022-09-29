@@ -8,6 +8,12 @@
   padding: 2.5em;
   @include g.box-shadows;
 
+  .ant-page-header-heading-left {
+    span {
+      color: g.$primary-color;
+    }
+  }
+
   h2 {
     color: g.$font-color;
   }

@@ -26,11 +26,11 @@ const Status = () => {
           auth_token: cookies.auth_token,
         },
       })
+      return response.data
     } catch (err) {
       message.error(`${err.response.data}`, 5)
       return
     }
-    return response.data
   }
 
   const getStatus = (data) => {

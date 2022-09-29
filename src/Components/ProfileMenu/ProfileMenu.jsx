@@ -1,4 +1,4 @@
-import { Avatar, Dropdown, Menu, Space } from 'antd'
+import { Avatar, Dropdown, Menu } from 'antd'
 import { NavLink } from 'react-router-dom'
 import './ProfileMenu.scss'
 
