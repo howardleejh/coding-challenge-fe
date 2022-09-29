@@ -67,7 +67,7 @@ const ProductForm = () => {
     try {
       await axios({
         method: 'patch',
-        url: `http://localhost:8000/api/v1/products/update`,
+        url: `${process.env.REACT_APP_BE}/api/v1/products/update`,
         headers: {
           auth_token: cookies.auth_token,
         },
@@ -124,7 +124,7 @@ const ProductForm = () => {
     try {
       await axios({
         method: 'delete',
-        url: `http://localhost:8000/api/v1/products/${productId}/delete`,
+        url: `${process.env.REACT_APP_BE}/api/v1/products/${productId}/delete`,
         headers: {
           auth_token: cookies.auth_token,
         },
@@ -146,7 +146,7 @@ const ProductForm = () => {
       try {
         response = await axios({
           method: 'get',
-          url: `http://localhost:8000/api/v1/products/${productId}`,
+          url: `${process.env.REACT_APP_BE}/api/v1/products/${productId}`,
           headers: {
             auth_token: cookies.auth_token,
           },

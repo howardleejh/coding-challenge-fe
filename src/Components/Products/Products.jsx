@@ -63,7 +63,7 @@ const Products = () => {
       try {
         response = await axios({
           method: 'get',
-          url: `http://localhost:8000/api/v1/products`,
+          url: `${process.env.REACT_APP_BE}/api/v1/products`,
           headers: {
             auth_token: cookies.auth_token,
           },

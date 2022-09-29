@@ -61,7 +61,7 @@ const AddProduct = () => {
     try {
       await axios({
         method: 'post',
-        url: `http://localhost:8000/api/v1/products/create`,
+        url: `${process.env.REACT_APP_BE}/api/v1/products/create`,
         headers: {
           auth_token: cookies.auth_token,
         },

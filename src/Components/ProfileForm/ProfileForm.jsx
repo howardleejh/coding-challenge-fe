@@ -23,7 +23,7 @@ const ProfileForm = () => {
     try {
       await axios({
         method: 'patch',
-        url: `http://localhost:8000/api/v1/profile`,
+        url: `${process.env.REACT_APP_BE}/api/v1/profile`,
         headers: {
           auth_token: cookies.auth_token,
         },
@@ -81,7 +81,7 @@ const ProfileForm = () => {
     try {
       await axios({
         method: 'delete',
-        url: `http://localhost:8000/api/v1/profile`,
+        url: `${process.env.REACT_APP_BE}/api/v1/profile`,
         headers: {
           auth_token: cookies.auth_token,
         },
