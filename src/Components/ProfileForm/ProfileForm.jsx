@@ -53,7 +53,7 @@ const ProfileForm = () => {
   }
 
   const onFinishFailed = () => {
-    message.error('Please try again', 5)
+    message.error(`Error: Please fill in the required fields`, 5)
     return
   }
 

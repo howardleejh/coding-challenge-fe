@@ -90,8 +90,8 @@ const AddProduct = () => {
     }
   }
 
-  const onFinishFailed = (err) => {
-    message.error(`Error: ${err}`, 5)
+  const onFinishFailed = () => {
+    message.error(`Error: Please fill in the required fields`, 5)
     return
   }
 

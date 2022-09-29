@@ -51,7 +51,8 @@ const Register = () => {
   }
 
   const onFinishFailed = () => {
-    message.error(`Please fill in the required fields`, 5)
+    message.error(`Error: Please fill in the required fields`, 5)
+    return
   }
 
   const resetHandler = () => {

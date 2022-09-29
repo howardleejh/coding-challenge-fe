@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { HomeContext } from '../../Contexts/HomeProvider'
 import { Form, Input, Button, message } from 'antd'
 import { useCookies } from 'react-cookie'
@@ -14,8 +14,28 @@ const Login = () => {
   // eslint-disable-next-line
   const [cookies, setCookie] = useCookies(['auth_token'])
 
+  const checkServer = async () => {
+    let response
+    try {
+      response = await axios({
+        method: 'get',
+        url: `${process.env.REACT_APP_BE}/`,
+      })
+      message.success(response.data)
+      return true
+    } catch (err) {
+      message.error(`${err.response.data}`)
+      return false
+    }
+  }
+
   const onFinish = async (values) => {
     setLoading(true)
+    const isServerReady = await checkServer()
+    if (!isServerReady) {
+      message.error(`Server is not ready, please try again`, 5)
+      return
+    }
     const { email, password } = values
     let response
     try {
@@ -41,13 +61,18 @@ const Login = () => {
     }
   }
 
-  const onFinishFailed = (errorInfo) => {
-    message.error(`Please try to login again.`, 5)
+  const onFinishFailed = () => {
+    message.error(`Error: Please try again.`, 5)
+    return
   }
 
   const resetHandler = () => {
     form.resetFields()
   }
+
+  useEffect(() => {
+    checkServer()
+  }, [])
 
   return (
     <div className='login-form-container'>
