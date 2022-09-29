@@ -1,0 +1,43 @@
+@use '../../Styles/Style.scss' as g;
+
+.register-form-container {
+  width: 45%;
+  background-color: g.$bg-dark;
+  color: g.$font-color;
+  border-radius: 25px;
+  padding: 2.5em;
+  @include g.box-shadows;
+
+  h2 {
+    color: g.$font-color;
+  }
+
+  #register-form {
+    width: 65%;
+    margin: 0 auto;
+
+    label {
+      color: g.$primary-color;
+      text-transform: uppercase;
+    }
+
+    button {
+      min-width: 15em;
+      margin: 0.25em;
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .register-form-container {
+    width: 85%;
+    padding: 1em;
+
+    #register-form {
+      width: 85%;
+
+      button {
+        margin: 0.25em 0;
+      }
+    }
+  }
+}

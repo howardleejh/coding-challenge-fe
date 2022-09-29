@@ -1,0 +1,36 @@
+@use '../../Styles/Style.scss' as g;
+
+.card {
+  width: 25em;
+  height: 30em;
+  transition: ease-out 0.3s;
+  position: relative;
+  display: grid;
+  place-items: center;
+
+  &:hover {
+    transform: scale(1.02);
+    @include g.box-shadows;
+    cursor: pointer;
+  }
+
+  ul {
+    width: 85%;
+    min-height: 35%;
+    background-color: rgba(0, 0, 0, 0.6);
+    list-style: none;
+    text-align: start;
+    padding: 1.5em;
+    position: absolute;
+    bottom: 0;
+    pointer-events: none;
+
+    h3,
+    h4,
+    h5 {
+      margin: 0;
+      text-transform: capitalize;
+      color: g.$primary-color;
+    }
+  }
+}

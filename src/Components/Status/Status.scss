@@ -1,0 +1,76 @@
+@use '../../Styles/Style.scss' as g;
+
+.dashboard-status {
+  width: 45%;
+  border-radius: 25px;
+  background-color: g.$bg-dark;
+  color: g.$font-color;
+  padding: 2em;
+  @include g.box-shadows;
+
+  h1,
+  h3,
+  h4 {
+    color: g.$font-color;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 2.5em;
+    text-transform: capitalize;
+  }
+
+  .dashboard-checkbox {
+    color: g.$font-color;
+    margin-bottom: 1.5em;
+  }
+
+  .user-label {
+    font-size: 0.75em;
+  }
+
+  .user-status {
+    margin: 1.5em 0;
+
+    .ant-descriptions-view,
+    .ant-descriptions-row {
+      border: none;
+    }
+
+    .ant-descriptions-item-label {
+      width: 10em;
+      background-color: g.$primary-color;
+      border: none;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .ant-descriptions-item-content {
+      background-color: rgb(55, 55, 55);
+      color: g.$font-color;
+      font-weight: 700;
+      font-size: 1.5em;
+      border: none;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dashboard-status {
+    width: 85%;
+
+    h1 {
+      font-size: 2em;
+    }
+
+    .user-status {
+      .ant-descriptions-view {
+        width: 60vw;
+      }
+    }
+    button {
+      margin-bottom: 1em;
+    }
+  }
+}

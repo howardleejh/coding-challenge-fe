@@ -1,0 +1,93 @@
+@use '../../Styles/Style.scss' as g;
+
+.products {
+  display: grid;
+  place-items: center;
+
+  .products-search {
+    width: 45%;
+    font-weight: 700;
+    margin-bottom: 2em;
+    background-color: g.$bg-dark;
+    border-radius: 25px;
+    padding: 2em;
+    @include g.box-shadows;
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      h3 {
+        color: g.$font-color;
+        text-transform: uppercase;
+        font-weight: 900;
+      }
+
+      li {
+        margin: 1em 0;
+
+        .ant-select {
+          width: 25em;
+
+          .ant-select-selector,
+          .ant-select-selection-item {
+            background-color: rgb(55, 55, 55);
+            color: g.$font-color;
+            border: none;
+            font-weight: 700;
+          }
+        }
+
+        .ant-select-arrow {
+          color: g.$font-color;
+        }
+
+        button {
+          width: 25em;
+          margin: 0 0.25em;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  .products-list {
+    width: 85%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    &::after {
+      content: '';
+      flex: auto;
+      margin-left: 5em;
+    }
+
+    .products-card {
+      margin: 1em;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .products {
+    .products-search {
+      width: 85%;
+
+      ul {
+        li {
+          .ant-select {
+            width: 20em;
+          }
+          button {
+            width: 20em;
+          }
+        }
+      }
+    }
+
+    .products-list {
+      justify-content: center;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+@use '../../Styles/Style.scss' as g;
+
+.profile-form-container {
+  width: 45%;
+  background-color: g.$bg-dark;
+  color: g.$font-color;
+  border-radius: 25px;
+  padding: 2.5em;
+  @include g.box-shadows;
+
+  h2 {
+    color: g.$font-color;
+  }
+
+  #profile-form {
+    width: 65%;
+    margin: 0 auto;
+
+    label {
+      color: g.$primary-color;
+      text-transform: uppercase;
+    }
+
+    #profile-form_fullName {
+      text-transform: capitalize;
+    }
+
+    .ant-input-disabled,
+    .ant-input-affix-wrapper-disabled {
+      background-color: rgb(55, 55, 55);
+      border: none;
+      color: g.$font-color;
+      font-weight: 700;
+    }
+  }
+  .edit-profile-button,
+  .delete-profile-button {
+    width: 65%;
+    margin: 0.5em;
+    font-weight: 700;
+  }
+}
+.profile-form-modal {
+  .ant-modal-content {
+    background-color: g.$bg-dark;
+    color: g.$font-color;
+
+    .ant-modal-close-x {
+      color: g.$font-color;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile-form-container {
+    width: 85%;
+    padding: 1em;
+
+    button {
+      width: 15em;
+      margin: 0.5em 0;
+    }
+
+    #profile-form {
+      width: 85%;
+    }
+    .edit-profile-button,
+    .delete-profile-button {
+      width: 85%;
+      margin: 2em 0;
+    }
+  }
+}

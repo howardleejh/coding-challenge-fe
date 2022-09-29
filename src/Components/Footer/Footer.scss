@@ -1,0 +1,11 @@
+.footer {
+  h6 {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer {
+    font-size: 0.75em;
+  }
+}

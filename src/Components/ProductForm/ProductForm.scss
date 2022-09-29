@@ -1,0 +1,103 @@
+@use '../../Styles/Style.scss' as g;
+
+.product-form-container {
+  width: 75%;
+  background-color: g.$bg-dark;
+  padding: 2.5em;
+  border-radius: 25px;
+
+  .ant-page-header-heading-left {
+    span {
+      color: g.$primary-color;
+    }
+  }
+
+  label {
+    color: g.$primary-color;
+  }
+
+  h1,
+  h4 {
+    color: g.$font-color;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  img {
+    width: 25em;
+  }
+
+  h1 {
+    text-transform: capitalize;
+  }
+
+  h4 {
+    margin-bottom: 1em;
+  }
+
+  .toggle-edit-btn,
+  .delete-product-btn {
+    width: 75%;
+    margin-bottom: 1em;
+
+    span {
+      color: white;
+    }
+  }
+
+  input {
+    text-transform: capitalize;
+  }
+
+  .product-form {
+    width: 75%;
+    text-align: left;
+
+    .ant-input-disabled,
+    .ant-input-affix-wrapper-disabled,
+    .ant-input-number-disabled,
+    .ant-upload-disabled button {
+      background-color: rgb(55, 55, 55);
+      border: none;
+      color: g.$font-color;
+      font-weight: 700;
+    }
+
+    .ant-upload-list-item-name {
+      color: g.$font-color;
+    }
+  }
+  .visibility {
+    display: none;
+  }
+}
+.product-form-modal {
+  .ant-modal-content {
+    background-color: g.$bg-dark;
+    color: g.$font-color;
+
+    .ant-modal-close-x {
+      color: g.$font-color;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .product-form-container {
+    width: 85%;
+
+    img {
+      width: 17em;
+      margin: 2em 0;
+    }
+
+    .product-form {
+      width: 100%;
+    }
+
+    .toggle-edit-btn,
+    .delete-product-btn {
+      width: 100%;
+    }
+  }
+}

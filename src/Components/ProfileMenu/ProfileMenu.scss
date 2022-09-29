@@ -1,0 +1,42 @@
+@use '../../Styles/Style.scss' as g;
+
+.profile-menu {
+  background-color: rgb(random(255), random(255), random(255));
+  border: 2px solid white;
+  font-weight: 700;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  span {
+    filter: invert(100%);
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+}
+
+.ant-dropdown {
+  ul {
+    width: 20vw;
+    text-align: center;
+    background-color: g.$bg-dark;
+    margin: 0;
+
+    li {
+      font-weight: 700;
+      color: g.$font-color;
+    }
+
+    & span:hover {
+      filter: invert(100);
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .ant-dropdown {
+    ul {
+      width: 100vw;
+    }
+  }
+}

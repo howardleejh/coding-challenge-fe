@@ -1,0 +1,17 @@
+.main-layout {
+  header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+  }
+
+  main {
+    min-height: 80vh;
+    padding-bottom: 5em;
+  }
+
+  footer {
+    padding: 0.5em 0;
+  }
+}

@@ -1,0 +1,15 @@
+body {
+  background-color: rgb(255, 215, 116);
+  padding-top: 12em;
+  box-sizing: border-box;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

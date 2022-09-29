@@ -1,0 +1,40 @@
+@use '../../Styles/Style.scss' as g;
+
+.login-container {
+  width: 45%;
+  background-color: g.$bg-dark;
+  color: g.$font-color;
+  @include g.box-shadows;
+  border-radius: 25px;
+  padding: 2.5em;
+
+  h2,
+  h3,
+  h4 {
+    color: g.$font-color;
+  }
+
+  .login-greeting {
+    font-size: 3.5em;
+    text-transform: capitalize;
+  }
+
+  button {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .login-container {
+    width: 85%;
+    padding: 1em;
+
+    .login-greeting {
+      font-size: 2em;
+    }
+
+    button {
+      width: 100%;
+      margin: 0.5em 0;
+    }
+  }
+}
