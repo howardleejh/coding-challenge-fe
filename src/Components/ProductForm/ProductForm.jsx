@@ -173,7 +173,7 @@ const ProductForm = () => {
 
     getProduct()
     // eslint-disable-next-line
-  }, [])
+  }, [imageUpload])
 
   return (
     <div className='product-form-container'>
@@ -193,6 +193,8 @@ const ProductForm = () => {
                   src={
                     product.image
                       ? product.image
+                        ? imageUpload
+                        : `https://via.placeholder.com/400`
                       : `https://via.placeholder.com/400`
                   }
                   alt='Product'
@@ -289,7 +291,7 @@ const ProductForm = () => {
                       icon={<UploadOutlined />}
                       loading={loading}
                     >
-                      Update Image
+                      Upload Image
                     </Button>
                   </Upload>
                 </Form.Item>

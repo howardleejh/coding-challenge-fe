@@ -191,7 +191,7 @@ const AddProduct = () => {
                     icon={<UploadOutlined />}
                     loading={loading}
                   >
-                    Update Image
+                    Upload Image
                   </Button>
                 </Upload>
               </Form.Item>
