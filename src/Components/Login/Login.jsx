@@ -14,25 +14,9 @@ const Login = () => {
   // eslint-disable-next-line
   const [cookies, setCookie] = useCookies(['auth_token'])
 
-  const checkServer = async () => {
-    let response
-    try {
-      response = await axios({
-        method: 'get',
-        url: `${process.env.REACT_APP_BE}/`,
-      })
-      message.success(response.data)
-      return true
-    } catch (err) {
-      message.error(`${err.response.data}`)
-      return false
-    }
-  }
-
   const onFinish = async (values) => {
     setLoading(true)
-    const isServerReady = await checkServer()
-    if (!isServerReady) {
+    if (!home.isServerReady) {
       message.error(`Server is not ready, please try again`, 5)
       return
     }
@@ -71,7 +55,11 @@ const Login = () => {
   }
 
   useEffect(() => {
-    checkServer()
+    if (home.isServerReady) {
+      return
+    }
+    home.checkServer()
+    // eslint-disable-next-line
   }, [])
 
   return (
