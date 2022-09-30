@@ -51,6 +51,8 @@ const ProductForm = () => {
         message.error(`${info.file.name} file upload failed.`, 5)
         return
       }
+      setIsLoading(false)
+      return
     },
 
     progress: {
@@ -102,6 +104,7 @@ const ProductForm = () => {
   }
 
   const resetHandler = () => {
+    setImageUpload(null)
     form.resetFields()
     return
   }
@@ -109,6 +112,7 @@ const ProductForm = () => {
   const toggleEditing = () => {
     if (isEditing) {
       form.resetFields()
+      setImageUpload(null)
       setIsEditing(false)
       return
     }
@@ -191,11 +195,9 @@ const ProductForm = () => {
               <>
                 <img
                   src={
-                    product.image
-                      ? product.image
-                        ? imageUpload
-                        : `https://via.placeholder.com/400`
-                      : `https://via.placeholder.com/400`
+                    imageUpload ||
+                    product.image ||
+                    `https://via.placeholder.com/400`
                   }
                   alt='Product'
                 />
@@ -285,7 +287,11 @@ const ProductForm = () => {
                   <InputNumber />
                 </Form.Item>
                 <Form.Item>
-                  <Upload {...props} className='product-img-upload'>
+                  <Upload
+                    {...props}
+                    className='product-img-upload'
+                    onRemove={() => setImageUpload(null)}
+                  >
                     <Button
                       type='primary'
                       icon={<UploadOutlined />}

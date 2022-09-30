@@ -45,6 +45,8 @@ const AddProduct = () => {
         setIsLoading(false)
         return
       }
+      setIsLoading(false)
+      return
     },
 
     progress: {
@@ -96,6 +98,7 @@ const AddProduct = () => {
   }
 
   const resetHandler = () => {
+    setImageUpload(null)
     form.resetFields()
     return
   }
@@ -144,7 +147,7 @@ const AddProduct = () => {
                   },
                 ]}
               >
-                <Input />
+                <Input placeholder='Title of Product' />
               </Form.Item>
               <Form.Item
                 label='Collection'
@@ -157,7 +160,7 @@ const AddProduct = () => {
                   },
                 ]}
               >
-                <Input />
+                <Input placeholder='Collection' />
               </Form.Item>
               <Form.Item
                 label='Sub Collection'
@@ -169,7 +172,7 @@ const AddProduct = () => {
                   },
                 ]}
               >
-                <Input />
+                <Input placeholder='Sub Collection' />
               </Form.Item>
               <Form.Item
                 label='Stock'
@@ -185,7 +188,11 @@ const AddProduct = () => {
                 <InputNumber />
               </Form.Item>
               <Form.Item>
-                <Upload {...props} className='product-img-upload'>
+                <Upload
+                  {...props}
+                  className='product-img-upload'
+                  onRemove={() => setImageUpload(null)}
+                >
                   <Button
                     type='primary'
                     icon={<UploadOutlined />}

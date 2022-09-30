@@ -88,7 +88,7 @@ const Login = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder='email' />
         </Form.Item>
         <Form.Item
           label='Password'
@@ -101,7 +101,7 @@ const Login = () => {
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password placeholder='password' />
         </Form.Item>
         <h4>
           Not yet a member? Please register{' '}

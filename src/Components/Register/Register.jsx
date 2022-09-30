@@ -86,7 +86,7 @@ const Register = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder='[First Name] [Last Name] ' />
         </Form.Item>
 
         <Form.Item
@@ -101,7 +101,7 @@ const Register = () => {
             },
           ]}
         >
-          <Input />
+          <Input placeholder='@email.com' />
         </Form.Item>
 
         <Form.Item
@@ -115,7 +115,7 @@ const Register = () => {
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password placeholder='password' />
         </Form.Item>
 
         <Form.Item
@@ -129,7 +129,7 @@ const Register = () => {
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password placeholder='confirm password' />
         </Form.Item>
 
         <Form.Item>
